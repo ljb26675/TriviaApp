@@ -104,7 +104,7 @@ class QuestionView extends Component {
 
   questionAction = (id) => (action) => {
     if(action === 'DELETE') {
-      id = parseInt(id)+1
+      id = parseInt(id)
       if(window.confirm('are you sure you want to delete the question?')) {
         $.ajax({
           url: `/questions/${id}`, //TODO: update request URL
@@ -114,6 +114,7 @@ class QuestionView extends Component {
           },
           error: (error) => {
             //alert('Unable to load questions. Please try your request again')
+            alert(id)
             return;
           }
         })
@@ -144,7 +145,7 @@ class QuestionView extends Component {
               key={q.id}
               question={q.question}
               answer={q.answer}
-              category={this.state.categories[q.category-1]} 
+              category={this.state.categories[q.category-1]}
               difficulty={q.difficulty}
               questionAction={this.questionAction(q.id)}
             />
