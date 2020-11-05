@@ -1,0 +1,71 @@
+# setting up the virtual env (gitbash)
+python -m virtualenv env
+source env/Scripts/activate
+
+# install requirements (git bash)
+pip install -r requirements.txt
+
+# Create trivia database (psql)
+CREATE DATABASE trivia;
+
+#set up password conf so I don't have to login
+C:\Users\linse\AppData\Roaming\postgresql\pgpass.conf
+
+# restore the database (cmd prompt)
+C:\Users\linse\OneDrive\Desktop\fullstack\FSND\projects\02_trivia_api\starter\backend> psql -U postgres trivia < trivia.psql
+SET
+SET
+SET
+SET
+SET
+ set_config
+------------
+
+(1 row)
+
+SET
+SET
+SET
+SET
+SET
+SET
+CREATE TABLE
+ERROR:  role "caryn" does not exist
+CREATE SEQUENCE
+ERROR:  role "caryn" does not exist
+ALTER SEQUENCE
+CREATE TABLE
+ERROR:  role "caryn" does not exist
+CREATE SEQUENCE
+ERROR:  role "caryn" does not exist
+ALTER SEQUENCE
+ALTER TABLE
+ALTER TABLE
+COPY 6
+COPY 19
+ setval
+--------
+      6
+(1 row)
+
+ setval
+--------
+     23
+(1 row)
+
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+
+
+# run the server (using virtualenv in gitbash)
+(env)
+linse@LinseyRazer MINGW64 ~/OneDrive/Desktop/fullstack/FSND/projects/02_trivia_api/starter/backend (master)
+
+export FLASK_APP=flaskr
+export FLASK_ENV=development
+flask run
+
+
+
+have everything except for search and delete running?
