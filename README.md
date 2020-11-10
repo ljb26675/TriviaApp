@@ -27,12 +27,32 @@ GET /categories/<int:category_id>
 - General:
     - Returns the id and type of that category object and a success value.
 - Sample: `curl http://localhost:5000/categories/5`
+
     ```
     {
         categories: {
             id: 5,
             type: "Entertainment"
         },
+        success: true
+    }
+    ```
+
+GET /categories
+- General:
+    - Returns a list of all types of categories and a success value.
+- Sample: `http://localhost:5000/categories`
+    
+    ```
+    {
+        categories: [
+            "Science",
+            "Art",
+            "Geography",
+            "History",
+            "Entertainment",
+            "Sports"
+        ],
         success: true
     }
     ```
