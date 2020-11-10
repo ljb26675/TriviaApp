@@ -185,16 +185,14 @@ def create_app(test_config=None):
 
     new_question = body.get('question', None)
     new_answer = body.get('answer', None)
-    new_category = int(body.get('category', None))
-    new_difficulty = int(body.get('difficulty', None))
+    new_category = body.get('category', None)
+    new_difficulty = body.get('difficulty', None)
 
     search = body.get('searchTerm', None)
 
     
     try:
-      print("TEST")
       if search:
-        print(search)
         questions = Question.query.order_by(Question.id).filter(Question.question.ilike('%{}%'.format(search))).all()
         formatted_qs = paginate_questions(request, questions)
         return jsonify({
@@ -282,40 +280,47 @@ def create_app(test_config=None):
   def create_quiz():
     body = request.get_json()
 
-    new_question = body.get('question', None)
-    new_answer = body.get('answer', None)
-    new_category = body.get('category', None)
-    new_difficulty = body.get('difficulty', None)
-
-    search = body.get('search', None)
-
+    previous_questions = body.get('previous_questions', None)
+    quiz_category = body.get('quiz_category', None)
+    questions = body.get('questions', None)
+    numQ = body.get('numQ', None)
     
     try:
 
-      if search:
-        questions = Question.query.order_by(Question.id).filter(Question.question.ilike('%{}%'.format(search))).all()
-        formattted_qs = paginate_questions(request, questions)
-        return jsonify({
-        'success': True,
-        'questions': formatted_qs,
-        'total_questions': len(questions)
-        })
-      else:
-    
-        question = Question(question=new_question, answer=new_answer, category=new_category, difficulty=new_difficulty)
-        question.insert()
 
+      if questions is None:
 
-        questions = Question.query.order_by(Question.id).all()
-        formatted_qs = paginate_questions(request, questions)
-          
-        return jsonify({ # current catergory, categories? 
-          'success': True,
-          'created': question.id,
-          'questions': formatted_qs,
-          'total_questions': len(questions)
+        numQ = 5
+
+        if quiz_category["id"] == -1: #works
+          questions = Question.query.all()
+        else:
+          cat = int(quiz_category["id"])+1          
+          questions = Question.query.filter(Question.category == cat).all()
+
+        formatted_qs = [question.format() for question in questions if question.question]
         
-        })
+
+        if len(formatted_qs) < 5:
+          numQ = len(formatted_qs)
+
+        questions = formatted_qs
+
+      if len(questions) != 0:
+        question = random.choice(questions)
+        #question = random.choice(formatted_qs)
+
+        questions.remove(question)
+      else:
+        question = []
+        
+      return jsonify({ # current catergory, categories? 
+        'success': True,
+        'question': question,
+        'numQ': numQ,
+        'questions': questions
+      })
+
     except:
       abort(422)
 

@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 import '../stylesheets/QuizView.css';
 
-const questionsPerPlay = 5; 
+//var questionsPerPlay = 5; 
 
 class QuizView extends Component {
   constructor(props){
@@ -16,7 +16,9 @@ class QuizView extends Component {
         numCorrect: 0,
         currentQuestion: {},
         guess: '',
-        forceEnd: false
+        forceEnd: false,
+        questionsPerPlay: 5,
+        questions: null
     }
   }
 
@@ -35,7 +37,7 @@ class QuizView extends Component {
     })
   }
 
-  selectCategory = ({type, id=0}) => {
+  selectCategory = ({type, id=-1}) => {
     this.setState({quizCategory: {type, id}}, this.getNextQuestion)
   }
 
@@ -54,7 +56,9 @@ class QuizView extends Component {
       contentType: 'application/json',
       data: JSON.stringify({
         previous_questions: previousQuestions,
-        quiz_category: this.state.quizCategory
+        quiz_category: this.state.quizCategory,
+        questions: this.state.questions,
+        numQ: this.state.questionsPerPlay
       }),
       xhrFields: {
         withCredentials: true
@@ -66,8 +70,12 @@ class QuizView extends Component {
           previousQuestions: previousQuestions,
           currentQuestion: result.question,
           guess: '',
-          forceEnd: result.question ? false : true
+          forceEnd: result.question ? false : true,
+          //forceEnd: result.questions.length == 0 ? false : true,
+          questionsPerPlay: result.numQ,
+          questions: result.questions
         })
+        
         return;
       },
       error: (error) => {
@@ -95,7 +103,8 @@ class QuizView extends Component {
       numCorrect: 0,
       currentQuestion: {},
       guess: '',
-      forceEnd: false
+      forceEnd: false,
+      questions: null
     })
   }
 
@@ -150,12 +159,12 @@ class QuizView extends Component {
   }
 
   renderPlay(){
-    return this.state.previousQuestions.length === questionsPerPlay || this.state.forceEnd
+    return this.state.previousQuestions.length === this.state.questionsPerPlay || this.state.forceEnd
       ? this.renderFinalScore()
       : this.state.showAnswer 
         ? this.renderCorrectAnswer()
         : (
-          <div className="quiz-play-holder">
+          <div className="quiz-play-holder"> TEST {this.state.questionsPerPlay}
             <div className="quiz-question">{this.state.currentQuestion.question}</div>
             <form onSubmit={this.submitGuess}>
               <input type="text" name="guess" onChange={this.handleChange}/>
