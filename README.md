@@ -26,7 +26,7 @@ The api will return 4 error types when requests fail:
 1. [GET /categories/{category_id}](#get-categoriescategory_id "Goto get-categoriescategory_id")
 2. [GET /categories](#get-categories "Goto get-categories")
 3. [GET /questions](#get-questions "Goto get-questions")
-4. [DELETE /questions/{question_id}](#get-questionsquestion_id "Goto get-questionsquestion_id")
+4. [DELETE /questions/{question_id}](#delete-questionsquestion_id "Goto delete-questionsquestion_id")
 5. [POST /questions](#post-questions "Goto post-questions")
 
 ## Endpoints
