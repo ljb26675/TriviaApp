@@ -25,6 +25,9 @@ The api will return 4 error types when requests fail:
 ## Endpoints Glossary
 1. [GET /categories/{category_id}](#get-categoriescategory_id "Goto get-categoriescategory_id")
 2. [GET /categories](#get-categories "Goto get-categories")
+3. [GET /questions](#get-questions "Goto get-questions")
+4. [DELETE /questions/{question_id}](#get-questionsquestion_id "Goto get-questionsquestion_id")
+5. [POST /questions](#post-questions "Goto post-questions")
 
 ## Endpoints
 ### GET /categories/{category_id}
@@ -61,7 +64,7 @@ The api will return 4 error types when requests fail:
     }
     ```
 
-**GET /questions**
+### GET /questions
 - General:
     - Gets a list of all questions with pagination. Returns a list of questions, number of total questions, current category, categories, and a success value.
 - Sample: `curl http://localhost:5000/questions?page=2`
@@ -155,7 +158,7 @@ The api will return 4 error types when requests fail:
 
 ```
 
-**DELETE /questions/{question_id}**
+### DELETE /questions/{question_id}
 - General:
     - Deletes a question if the given ID exists. Returns the id of the deleted question,
     success value, new question list, and total questions.
@@ -240,7 +243,7 @@ The api will return 4 error types when requests fail:
 }
 ```
 
-**POST /questions**
+### POST /questions
 - General, This POST call does one of two things, CREATES or SEARCHES:
 
     1. Creates a question with the given json values. Returns the
