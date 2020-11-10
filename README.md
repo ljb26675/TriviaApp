@@ -24,9 +24,9 @@ The api will return 4 error types when requests fail:
 
 ## Endpoints
 GET /categories/<int:category_id>
-    *General:
-        *Returns the id and type of that category object and a success value.
-    *Sample: `curl http://localhost:5000/categories/5`
+- General:
+    - Returns the id and type of that category object and a success value.
+- Sample: `curl http://localhost:5000/categories/5`
     ```
     {
         categories: {
