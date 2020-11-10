@@ -22,8 +22,11 @@ The api will return 4 error types when requests fail:
 - 422: Not Processable
 - 405: Method Not Allowed
 
+## Endpoints Glossary
+[GET /categories/{category_id}](#get-/categories/{category_id} "Goto get-/categories/{category_id}")
+
 ## Endpoints
-**GET /categories/{category_id}**
+### GET /categories/{category_id}
 - General:
     - Returns the id and type of that category object and a success value.
 - Sample: `curl http://localhost:5000/categories/5`
@@ -237,8 +240,7 @@ The api will return 4 error types when requests fail:
 ```
 
 **POST /questions**
-- General:
-    - This POST call does one of two things, CREATES or SEARCHES:
+- General, This POST call does one of two things, CREATES or SEARCHES:
 
     1. Creates a question with the given json values. Returns the
     success value, new question list with added question, and total questions.
