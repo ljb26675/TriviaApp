@@ -23,7 +23,7 @@ The api will return 4 error types when requests fail:
 - 405: Method Not Allowed
 
 ## Endpoints Glossary
-[GET /categories/{category_id}](#get-/categories/{category_id} "Goto get-/categories/{category_id}")
+[GET /categories/{category_id}](#get-categoriescategory_id "Goto get-categoriescategory_id")
 
 ## Endpoints
 ### GET /categories/{category_id}
