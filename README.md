@@ -2,9 +2,9 @@
 
 ## Getting Started 
 
-    *Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend
+- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend
     app is hosted at the default, `http://localhost:5000/`, which is set as a proxy in the frontend config.
-    *Authentication: This application does not require authentication or API keys.
+- Authentication: This application does not require authentication or API keys.
 
 ## Error Handling
 Errors are returned as JSON ojects in the following format:
