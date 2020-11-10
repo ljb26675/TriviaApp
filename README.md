@@ -17,10 +17,10 @@ Errors are returned as JSON ojects in the following format:
 }
 ```
 The api will return 4 error types when requests fail:
-    - 400: Bad Request
-    - 404: Resource Not Found
-    - 422: Not Processable
-    - 405: Method Not Allowed
+- 400: Bad Request
+- 404: Resource Not Found
+- 422: Not Processable
+- 405: Method Not Allowed
 
 ## Endpoints
 GET /categories/<int:category_id>
