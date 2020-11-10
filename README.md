@@ -238,12 +238,12 @@ The api will return 4 error types when requests fail:
 
 **POST /questions**
 - General:
-    - This POST call does one of two things:
+    - This POST call does one of two things, CREATES or SEARCHES:
 
-        1. Creates a question with the given json values. Returns the
-        success value, new question list with added question, and total questions.
-        The json must specify the question and answer text, category, and difficulty score.
-            - Sample Creation: `curl -X POST -H "Content-Type: application/json" -d '{"question":"Whats the deal with airline food?", "answer":"idk", "category":"5", "difficulty":"1"}' http://localhost:5000/questions`
+    1. Creates a question with the given json values. Returns the
+    success value, new question list with added question, and total questions.
+    The json must specify the question and answer text, category, and difficulty score.
+    - Sample Creation: `curl -X POST -H "Content-Type: application/json" -d '{"question":"Whats the deal with airline food?", "answer":"idk", "category":"5", "difficulty":"1"}' http://localhost:5000/questions`
 
         ```
         {
@@ -325,10 +325,26 @@ The api will return 4 error types when requests fail:
         }
         ```
 
-        2. Queries for a question and returns a list of all questions that contain the serach term.
-        Returns the success value, question list, and total questions.
-        The json must specify the search term for this to occur. 
-            - Sample Creation: `curl -X POST -H "Content-Type: application/json" -d '{"searchTerm":"hank"}' http://localhost:5000/questions`
+    2. Queries for a question and returns a list of all questions that contain the serach term.
+    Returns the success value, question list, and total questions.
+    The json must specify the search term for this to occur. 
+    - Sample Creation: `curl -X POST -H "Content-Type: application/json" -d '{"searchTerm":"hank"}' http://localhost:5000/questions`
         
         ```
+        {
+            "current_category": [],
+            "questions": [
+                {
+                "answer": "Apollo 13",
+                "category": 5,
+                "difficulty": 4,
+                "id": 2,
+                "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+                }
+            ],
+            "success": true,
+            "total_questions": 1
+        }
+        ```
+
 
