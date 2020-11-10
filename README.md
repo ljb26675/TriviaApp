@@ -23,7 +23,8 @@ The api will return 4 error types when requests fail:
 - 405: Method Not Allowed
 
 ## Endpoints Glossary
-[GET /categories/{category_id}](#get-categoriescategory_id "Goto get-categoriescategory_id")
+1. [GET /categories/{category_id}](#get-categoriescategory_id "Goto get-categoriescategory_id")
+2. [GET /categories](#get-categories "Goto get-categories")
 
 ## Endpoints
 ### GET /categories/{category_id}
@@ -41,7 +42,7 @@ The api will return 4 error types when requests fail:
     }
     ```
 
-**GET /categories**
+### GET /categories
 - General:
     - Returns a list of all types of categories and a success value.
 - Sample: `curl http://localhost:5000/categories`
