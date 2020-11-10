@@ -28,6 +28,7 @@ The api will return 4 error types when requests fail:
 3. [GET /questions](#get-questions "Goto get-questions")
 4. [DELETE /questions/{question_id}](#delete-questionsquestion_id "Goto delete-questionsquestion_id")
 5. [POST /questions](#post-questions "Goto post-questions")
+6. [GET /categories/{category_id}/questions](#get-categoriescategory_idquestions "Goto get-categoriescategory_idquestions")
 
 ## Endpoints
 ### GET /categories/{category_id}
@@ -246,7 +247,7 @@ The api will return 4 error types when requests fail:
 ### POST /questions
 - General, This POST call does one of two things, CREATES or SEARCHES:
 
-    1. Creates a question with the given json values. Returns the
+    1. **Creates** a question with the given json values. Returns the
     success value, new question list with added question, and total questions.
     The json must specify the question and answer text, category, and difficulty score.
     - Sample Creation: `curl -X POST -H "Content-Type: application/json" -d '{"question":"Whats the deal with airline food?", "answer":"idk", "category":"5", "difficulty":"1"}' http://localhost:5000/questions`
@@ -331,7 +332,7 @@ The api will return 4 error types when requests fail:
         }
         ```
 
-    2. Queries for a question and returns a list of all questions that contain the serach term.
+    2. **Searches** for a question and returns a list of all questions that contain the serach term.
     Returns the success value, question list, and total questions.
     The json must specify the search term for this to occur. 
     - Sample Creation: `curl -X POST -H "Content-Type: application/json" -d '{"searchTerm":"hank"}' http://localhost:5000/questions`
@@ -352,5 +353,42 @@ The api will return 4 error types when requests fail:
             "total_questions": 1
         }
         ```
+
+### GET /categories/{category_id}/questions
+- General:
+    - Gets questions based on the category. Returns the id of the
+    success value, question list, total questions, and current category.
+- Sample: `curl http://localhost:5000/categories/1/questions`
+
+```
+{
+  "current_category": 1,
+  "questions": [
+    {
+      "answer": "The Liver",
+      "category": 1,
+      "difficulty": 4,
+      "id": 20,
+      "question": "What is the heaviest organ in the human body?"
+    },
+    {
+      "answer": "Alexander Fleming",
+      "category": 1,
+      "difficulty": 3,
+      "id": 21,
+      "question": "Who discovered penicillin?"
+    },
+    {
+      "answer": "Blood",
+      "category": 1,
+      "difficulty": 4,
+      "id": 22,
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    }
+  ],
+  "success": true,
+  "total_questions": 3
+}
+```
 
 
