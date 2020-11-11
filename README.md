@@ -388,7 +388,7 @@ The api will return 4 error types when requests fail:
         }
         ```
 
-    2. **Searches** for a question and returns a list of all questions that contain the serach term.
+    2. **Searches** for a question and returns a list of all questions that contain the search term.
     Returns the success value, question list, and total questions.
     The json must specify the search term for this to occur. 
     - Sample Creation: `curl -X POST -H "Content-Type: application/json" -d '{"searchTerm":"hank"}' http://localhost:5000/questions`
