@@ -294,7 +294,7 @@ def create_app(test_config=None):
         }), 400
 
     @app.errorhandler(405)
-    def not_found(error):
+    def method_not_allowed(error):
         return jsonify({
             "success": False,
             "error": 405,
@@ -302,7 +302,7 @@ def create_app(test_config=None):
         }), 405
 
     @app.errorhandler(500)
-    def not_found(error):
+    def server_error(error):
         return jsonify({
             "success": False,
             "error": 500,
