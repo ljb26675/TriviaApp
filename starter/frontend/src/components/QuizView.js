@@ -54,7 +54,7 @@ class QuizView extends Component {
       contentType: 'application/json',
       data: JSON.stringify({
         previous_questions: previousQuestions,
-        quiz_category: parseInt(this.state.quizCategory["id"])+1,
+        quiz_category: this.state.quizCategory,
         questions: this.state.questions,
         numQ: this.state.questionsPerPlay
       }),
@@ -110,7 +110,7 @@ class QuizView extends Component {
           <div className="quiz-play-holder">
               <div className="choose-header">Choose Category</div>
               <div className="category-holder">
-                  <div className="play-category" onClick={this.selectCategory}>ALL</div>
+                  <div className="play-category" onClick={this.selectCategory}>ALL</div> 
                   {Object.keys(this.state.categories).map(id => {
                   return (
                     <div

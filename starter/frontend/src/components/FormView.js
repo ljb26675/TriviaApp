@@ -42,7 +42,7 @@ class FormView extends Component {
         question: this.state.question,
         answer: this.state.answer,
         difficulty: this.state.difficulty,
-        category: parseInt(this.state.category)+1
+        category: this.state.category
       }),
       xhrFields: {
         withCredentials: true

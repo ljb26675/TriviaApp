@@ -5,6 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from flaskr import create_app
 from models import setup_db, Question, Category
+from psycopg2.extras import Json
+import json
 
 
 class TriviaTestCase(unittest.TestCase):
@@ -31,16 +33,25 @@ class TriviaTestCase(unittest.TestCase):
 
         self.quiz = {
             'previous_questions': [],
-            'quiz_category': 0,
+            'quiz_category': {
+                'id': -1,
+                'type': 'null'
+            },
             'questions': None,
             'numQ': 5
         }
-
         self.quiz2 = {
             'previous_questions': [],
-            'quiz_category': 1,
+            'quiz_category': {
+                'id': 1,
+                'type': 'Science'
+            },
             'questions': None,
             'numQ': 3
+        }
+
+        self.quiz3 = {
+            'previous_questions': []
         }
 
 
@@ -194,34 +205,41 @@ class TriviaTestCase(unittest.TestCase):
 
 
     '''
-    Test POST /quizzes for ALL quiz (category = 0)
+    Test POST /quizzes for ALL quiz (category = -1)
     '''
-    def test_create_quizzes(self):
+    def test_create_quizzes1(self):
         res = self.client().post('/quizzes', json=self.quiz)
         data = json.loads(res.data)
-
-        questions = Question.query.filter(Question.category == self.quiz["quiz_category"]).all()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['question'])
         self.assertTrue(data['questions'])
-        self.assertEqual(data['numQ'], len(questions))
+        self.assertTrue(data['numQ'])
 
     '''
     Test POST /quizzes for science quiz (category = 1)
     '''
-    def test_create_quizzes(self):
+    def test_create_quizzes2(self):
         res = self.client().post('/quizzes', json=self.quiz2)
         data = json.loads(res.data)
-
-        questions = Question.query.filter(Question.category == self.quiz2["quiz_category"]).all()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['question'])
         self.assertTrue(data['questions'])
-        self.assertEqual(data['numQ'], len(questions)) 
+        self.assertTrue(data['numQ'])
+
+    '''
+    Test POST /quizzes error
+    '''
+    def test_create_quizzes_error(self):
+        res = self.client().post('/quizzes', json=self.quiz3)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'unprocessable')
     
 
 # Make the tests conveniently executable

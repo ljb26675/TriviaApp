@@ -66,7 +66,7 @@ def create_app(test_config=None):
     def get_categories():
 
         categories = Category.query.all()
-        formatted_cat = [cat.type for cat in categories]
+        formatted_cat = {cat.id: cat.type for cat in categories}
 
         if len(formatted_cat) == 0:
             abort(404)
@@ -86,7 +86,7 @@ def create_app(test_config=None):
     def get_questions():
 
         categories = Category.query.all()
-        formatted_cat = [cat.type for cat in categories]
+        formatted_cat = {cat.id: cat.type for cat in categories}
 
         questions = [question for question in Question.query.all()
                      if question.question]
@@ -234,10 +234,10 @@ def create_app(test_config=None):
 
                 numQ = 5
 
-                if quiz_category == 0:
+                if quiz_category["id"] == -1:
                     questions = Question.query.all()
                 else:
-                    cat = quiz_category
+                    cat = int(quiz_category["id"])
                     questions = Question.query.filter(
                         Question.category == cat).all()
 
