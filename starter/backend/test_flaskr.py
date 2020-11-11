@@ -111,7 +111,7 @@ class TriviaTestCase(unittest.TestCase):
     Test error
     '''
     def test_get_questions_error(self):
-        res = self.client().get('/questions?page=3')
+        res = self.client().get('/questions?page=20')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -231,13 +231,6 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data['question'])
         self.assertTrue(data['questions'])
         self.assertEqual(data['numQ'], len(questions)) 
-
-
-    '''
-    Test POST quizzes success ALL
-    Test POST quizzes category
-    Test POST quizzes fail with not enough args
-    '''
     
 
 # Make the tests conveniently executable
