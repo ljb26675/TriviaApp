@@ -43,7 +43,6 @@ class TriviaTestCase(unittest.TestCase):
             'numQ': 3
         }
 
-        self.delete = 25
 
         # binds the app to the current context
         with self.app.app_context():
@@ -56,10 +55,6 @@ class TriviaTestCase(unittest.TestCase):
         """Executed after reach test"""
         pass
 
-    """
-    TODO
-    Write at least one test for each test for successful operation and for expected errors.
-    """
 
     '''
     GET /categories test
@@ -145,17 +140,17 @@ class TriviaTestCase(unittest.TestCase):
     '''
     Test POST /questions for adding
     '''
-    # def test_create_new_question(self):
-    #     res = self.client().post('/questions', json=self.new_question)
-    #     data = json.loads(res.data)
-    #     question = Question.query.filter(Question.id == data['created']).one_or_none()
+    def test_create_new_question(self):
+        res = self.client().post('/questions', json=self.new_question)
+        data = json.loads(res.data)
+        question = Question.query.filter(Question.id == data['created']).one_or_none()
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(data['created'])
-    #     self.assertTrue(data['questions'])
-    #     self.assertTrue(data['total_questions'])
-    #     self.assertTrue(question)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['created'])
+        self.assertTrue(data['questions'])
+        self.assertTrue(data['total_questions'])
+        self.assertTrue(question)
 
     '''
     Test POST /questions for search
@@ -171,24 +166,20 @@ class TriviaTestCase(unittest.TestCase):
     
 
     '''
-    Test POST for unsuccessful add
-    '''
-
-    '''
     Test DELETE
     '''
-    # def test_delete_question(self):
-    #     res = self.client().delete('/questions/25')
-    #     data = json.loads(res.data)
+    def test_delete_question(self): # only works on freshdb, need to restore everytime to run
+        res = self.client().delete('/questions/5')
+        data = json.loads(res.data)
 
-    #     question = Question.query.filter(Question.id == 25).one_or_none()
+        question = Question.query.filter(Question.id == 5).one_or_none()
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertEqual(data['deleted'], 25)
-    #     self.assertTrue(data['total_questions'])
-    #     self.assertTrue(data['questions'])
-    #     self.assertEqual(question, None)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(data['deleted'], 5)
+        self.assertTrue(data['total_questions'])
+        self.assertTrue(data['questions'])
+        self.assertEqual(question, None)
 
     '''
     Test error
