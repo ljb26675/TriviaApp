@@ -234,7 +234,7 @@ def create_app(test_config=None):
 
                 numQ = 5
 
-                if quiz_category["id"] == -1:
+                if int(quiz_category["id"]) == -1:
                     questions = Question.query.all()
                 else:
                     cat = int(quiz_category["id"])

@@ -180,14 +180,14 @@ class TriviaTestCase(unittest.TestCase):
     Test DELETE
     '''
     def test_delete_question(self): # only works on freshdb, need to restore everytime to run
-        res = self.client().delete('/questions/5')
+        res = self.client().delete('/questions/9')
         data = json.loads(res.data)
 
-        question = Question.query.filter(Question.id == 5).one_or_none()
+        question = Question.query.filter(Question.id == 9).one_or_none()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 5)
+        self.assertEqual(data['deleted'], 9)
         self.assertTrue(data['total_questions'])
         self.assertTrue(data['questions'])
         self.assertEqual(question, None)
