@@ -71,3 +71,5 @@ flask run
 have everything except for search and delete running?
 
 have everything except for testing, and quiz sometimes returns duplicates
+
+just need to write tests now and remove the current category field from the returns of the gets
