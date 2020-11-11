@@ -137,7 +137,6 @@ The api will return 4 error types when requests fail:
     "Entertainment",
     "Sports"
   ],
-  "current_category": [],
   "questions": [
     {
       "answer": "Agra",
@@ -396,7 +395,6 @@ The api will return 4 error types when requests fail:
         
         ```
         {
-            "current_category": [],
             "questions": [
                 {
                 "answer": "Apollo 13",
@@ -453,6 +451,35 @@ The api will return 4 error types when requests fail:
     - An endpoint for the quizzes tab. It requires json input of previous questions,
   quiz category, questions, and numQ. It returns the success value,
   a quiz question, questions remaining, and number of questions.
-- Sample: `curl -X POST -H "Content-Type: application/json" -d '{"previous_questions":[], "quiz_category":{id: "0", type: "Science"}, "questions":null, "numQ":5}' http://localhost:5000/quizzes`
+- Sample: `curl -X POST -H "Content-Type: application/json" -d '{"previous_questions":[], "quiz_category":1, "questions":null, "numQ":5}' http://localhost:5000/quizzes`
 `
+```
+{
+  "numQ": 3,
+  "question": {
+    "answer": "The Liver",
+    "category": 1,
+    "difficulty": 4,
+    "id": 20,
+    "question": "What is the heaviest organ in the human body?"
+  },
+  "questions": [
+    {
+      "answer": "Alexander Fleming",
+      "category": 1,
+      "difficulty": 3,
+      "id": 21,
+      "question": "Who discovered penicillin?"
+    },
+    {
+      "answer": "Blood",
+      "category": 1,
+      "difficulty": 4,
+      "id": 22,
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    }
+  ],
+  "success": true
+}
+```
 
