@@ -1,6 +1,61 @@
-# API Reference
+# Trivia App
+This project is the Trivia App project for the Udacity Fullstack nanodegree course. Users should be
+able to add, delete, and search questions within the app. They should also be able to play the quiz
+with questions within the database.
 
-## Getting Started 
+## Getting Started
+### Pre-requisites and Local Development
+Make sure you have have Python3, pip and node installed on your local machines.
+
+#### Backend
+- From the backend folder, create your virtual env:
+`python -m virtualenv env`
+- Source that virtual env:
+`source env/Scripts/activate` (Windows)
+`source env/bin/activate` (Mac)
+- Install the requirements:
+`pip install -r requirements.txt`
+- Restore the database from the psql file:
+`psql trivia < trivia.psql`
+
+You will need to edit the models.py file to reflect your own local database. To do this, 
+edit the `database_path` var.
+
+- To run the app:
+```
+export FLASK_APP=flaskr
+export FLASK_ENV=development
+flask run
+```
+
+These commands put the application in development and directs our application to use the __init__.py file in our flaskr folder. Working in development mode shows an interactive debugger in the console and restarts the server whenever changes are made. If running locally on Windows, look for the commands in the Flask documentation.
+
+The application is run on http://localhost:5000/ by default and is a proxy in the frontend configuration.
+
+### Frontend
+From the frontend folder, run the following commands to start the client:
+
+```
+npm install // only once to install dependencies
+npm start 
+```
+
+By default, the frontend will run on http://localhost:3000/
+
+## Tests
+In order to run tests navigate to the backend folder and run the following commands:
+
+```
+dropdb trivia_test
+createdb trivia_test
+psql trivia_test < trivia.psql
+python test_flaskr.py
+```
+The first time you run the tests, omit the dropdb command.
+
+All tests are kept in that file and should be maintained as updates are made to app functionality.
+
+## API Reference
 
 - Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend
     app is hosted at the default, `http://localhost:5000/`, which is set as a proxy in the frontend config.
@@ -391,4 +446,11 @@ The api will return 4 error types when requests fail:
 }
 ```
 
+### POST /quizzes
+- General:
+    - An endpoint for the quizzes tab. It requires json input of previous questions,
+  quiz category, questions, and numQ. It returns the success value,
+  a quiz question, questions remaining, and number of questions.
+- Sample: `curl -X POST -H "Content-Type: application/json" -d '{"previous_questions":[], "quiz_category":{id: "0", type: "Science"}, "questions":null, "numQ":5}' http://localhost:5000/quizzes`
+`
 
