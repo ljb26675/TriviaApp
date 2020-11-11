@@ -3,8 +3,6 @@ import $ from 'jquery';
 
 import '../stylesheets/QuizView.css';
 
-//var questionsPerPlay = 5; 
-
 class QuizView extends Component {
   constructor(props){
     super();
@@ -24,7 +22,7 @@ class QuizView extends Component {
 
   componentDidMount(){
     $.ajax({
-      url: `/categories`, //TODO: update request URL
+      url: `/categories`,
       type: "GET",
       success: (result) => {
         this.setState({ categories: result.categories })
@@ -50,13 +48,13 @@ class QuizView extends Component {
     if(this.state.currentQuestion.id) { previousQuestions.push(this.state.currentQuestion.id) }
 
     $.ajax({
-      url: '/quizzes', //TODO: update request URL
+      url: '/quizzes',
       type: "POST",
       dataType: 'json',
       contentType: 'application/json',
       data: JSON.stringify({
         previous_questions: previousQuestions,
-        quiz_category: this.state.quizCategory,
+        quiz_category: parseInt(this.state.quizCategory["id"])+1,
         questions: this.state.questions,
         numQ: this.state.questionsPerPlay
       }),
@@ -71,7 +69,6 @@ class QuizView extends Component {
           currentQuestion: result.question,
           guess: '',
           forceEnd: result.question ? false : true,
-          //forceEnd: result.questions.length == 0 ? false : true,
           questionsPerPlay: result.numQ,
           questions: result.questions
         })
@@ -164,7 +161,7 @@ class QuizView extends Component {
       : this.state.showAnswer 
         ? this.renderCorrectAnswer()
         : (
-          <div className="quiz-play-holder"> TEST {this.state.questionsPerPlay}
+          <div className="quiz-play-holder">
             <div className="quiz-question">{this.state.currentQuestion.question}</div>
             <form onSubmit={this.submitGuess}>
               <input type="text" name="guess" onChange={this.handleChange}/>
