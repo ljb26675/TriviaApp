@@ -78,8 +78,8 @@ def create_app(test_config=None):
 
     '''
     GET /questions
-    Returns a list of questions, 
-    number of total questions, categories. 
+    Returns a list of questions,
+    number of total questions, categories.
     curl http://localhost:5000/questions?page=1
     '''
     @app.route('/questions', methods=['GET'])
@@ -141,7 +141,7 @@ def create_app(test_config=None):
         - curl -X POST -H "Content-Type: application/json" -d '{"question":"What's the deal with airline food?", "answer":"idk", "category":"5", "difficulty":"1"}' http://localhost:5000/questions
       2. Queries for a question and returns a list of all questions that contain the serach term.
         Returns the success value, question list, and total questions.
-    
+
     '''
     # curl -X POST -H "Content-Type: application/json" -d '{"question":"What's the deal with airline food?", "answer":"idk", "category":"5", "difficulty":"1"}' http://localhost:5000/questions
     @app.route('/questions', methods=['POST'])
@@ -221,46 +221,40 @@ def create_app(test_config=None):
     '''
     @app.route('/quizzes', methods=['POST'])
     def create_quiz():
-        body = request.get_json()
-
-        previous_questions = body.get('previous_questions', None)
-        quiz_category = body.get('quiz_category', None)
-        questions = body.get('questions', None)
-        numQ = body.get('numQ', None)
 
         try:
 
-            if questions is None:
+            body = request.get_json()
 
-                numQ = 5
+            previous_questions = body.get('previous_questions', None)
+            quiz_category = body.get('quiz_category', None)
 
-                if int(quiz_category["id"]) == -1:
-                    questions = Question.query.all()
-                else:
-                    cat = int(quiz_category["id"])
-                    questions = Question.query.filter(
-                        Question.category == cat).all()
+            if int(quiz_category["id"]) == 0:
+                questions = Question.query.all()
+            else:
+                cat = int(quiz_category["id"])
+                questions = Question.query.filter(
+                Question.category == cat).all()
 
-                formatted_qs = [question.format()
+            formatted_qs = [question
                                 for question in questions if question.question]
 
-                if len(formatted_qs) < 5:
-                    numQ = len(formatted_qs)
+            questions = formatted_qs
 
-                questions = formatted_qs
-
-            if len(questions) != 0:
-                question = random.choice(questions)
-
-                questions.remove(question)
+            if len(questions) == len(previous_questions):
+                question = None
             else:
-                question = []
+
+                question = random.choice(questions)
+                while question.id in previous_questions:
+                    question = random.choice(questions)
+                
+                question = question.format()
+                    
 
             return jsonify({
                 'success': True,
-                'question': question,
-                'numQ': numQ,
-                'questions': questions
+                'question': question
             })
 
         except:

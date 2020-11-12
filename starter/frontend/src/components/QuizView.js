@@ -3,6 +3,8 @@ import $ from 'jquery';
 
 import '../stylesheets/QuizView.css';
 
+const questionsPerPlay = 5;
+
 class QuizView extends Component {
   constructor(props){
     super();
@@ -14,9 +16,7 @@ class QuizView extends Component {
         numCorrect: 0,
         currentQuestion: {},
         guess: '',
-        forceEnd: false,
-        questionsPerPlay: 5,
-        questions: null
+        forceEnd: false
     }
   }
 
@@ -35,7 +35,7 @@ class QuizView extends Component {
     })
   }
 
-  selectCategory = ({type, id=-1}) => {
+  selectCategory = ({type, id=0}) => {
     this.setState({quizCategory: {type, id}}, this.getNextQuestion)
   }
 
@@ -54,9 +54,7 @@ class QuizView extends Component {
       contentType: 'application/json',
       data: JSON.stringify({
         previous_questions: previousQuestions,
-        quiz_category: this.state.quizCategory,
-        questions: this.state.questions,
-        numQ: this.state.questionsPerPlay
+        quiz_category: this.state.quizCategory
       }),
       xhrFields: {
         withCredentials: true
@@ -68,9 +66,7 @@ class QuizView extends Component {
           previousQuestions: previousQuestions,
           currentQuestion: result.question,
           guess: '',
-          forceEnd: result.question ? false : true,
-          questionsPerPlay: result.numQ,
-          questions: result.questions
+          forceEnd: result.question ? false : true
         })
         
         return;
@@ -100,8 +96,7 @@ class QuizView extends Component {
       numCorrect: 0,
       currentQuestion: {},
       guess: '',
-      forceEnd: false,
-      questions: null
+      forceEnd: false
     })
   }
 
@@ -156,7 +151,7 @@ class QuizView extends Component {
   }
 
   renderPlay(){
-    return this.state.previousQuestions.length === this.state.questionsPerPlay || this.state.forceEnd
+    return this.state.previousQuestions.length === questionsPerPlay || this.state.forceEnd
       ? this.renderFinalScore()
       : this.state.showAnswer 
         ? this.renderCorrectAnswer()
