@@ -215,9 +215,10 @@ def create_app(test_config=None):
 
     '''
     POST /quizzes
-    An endpoint for the quizzes tab. It requires json input of previous questions,
-    quiz category, questions, and numQ. It returns the success value,
-    a quiz question, questions remaining, and number of questions.
+    An endpoint for the quizzes tab. It requires json input of previous questions
+    and quiz category. To get all questions id = 0, while to get certain questions
+    its 1 - 6. It returns a success value and the random question if there's one
+    left that hasn't been asked. Otherwise, it returns None for the question.
     '''
     @app.route('/quizzes', methods=['POST'])
     def create_quiz():
