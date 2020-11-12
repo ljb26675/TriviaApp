@@ -34,11 +34,9 @@ class TriviaTestCase(unittest.TestCase):
         self.quiz = {
             'previous_questions': [],
             'quiz_category': {
-                'id': -1,
+                'id': 0,
                 'type': 'null'
             },
-            'questions': None,
-            'numQ': 5
         }
         self.quiz2 = {
             'previous_questions': [],
@@ -46,8 +44,6 @@ class TriviaTestCase(unittest.TestCase):
                 'id': 1,
                 'type': 'Science'
             },
-            'questions': None,
-            'numQ': 3
         }
 
         self.quiz3 = {
@@ -205,7 +201,7 @@ class TriviaTestCase(unittest.TestCase):
 
 
     '''
-    Test POST /quizzes for ALL quiz (category = -1)
+    Test POST /quizzes for ALL quiz (category = 0)
     '''
     def test_create_quizzes1(self):
         res = self.client().post('/quizzes', json=self.quiz)
@@ -214,8 +210,6 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['question'])
-        self.assertTrue(data['questions'])
-        self.assertTrue(data['numQ'])
 
     '''
     Test POST /quizzes for science quiz (category = 1)
@@ -227,8 +221,6 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['question'])
-        self.assertTrue(data['questions'])
-        self.assertTrue(data['numQ'])
 
     '''
     Test POST /quizzes error
