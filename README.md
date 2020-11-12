@@ -448,14 +448,18 @@ The api will return 4 error types when requests fail:
 
 ### POST /quizzes
 - General:
-    - An endpoint for the quizzes tab. It requires json input of previous questions,
-  quiz category, questions, and numQ. It returns the success value,
-  a quiz question, questions remaining, and number of questions.
-- Sample: `curl -X POST -H "Content-Type: application/json" -d '{"previous_questions":[], "quiz_category":1, "questions":null, "numQ":5}' http://localhost:5000/quizzes`
-`
+    - An endpoint for the quizzes tab. It requires json input of previous questions and
+  quiz category. To receive all questions, the quiz category is 0. It returns a success
+  value and the random question, or None if all questions have been asked.
+
+- Sample: 
+```
+curl -X POST -H "Content-Type: application/json" -d '{"previous_questions":[], "quiz_category": { "id": 1, "type": "Science"}}' http://localhost:5000/quizzes
+```
+
+
 ```
 {
-  "numQ": 3,
   "question": {
     "answer": "The Liver",
     "category": 1,
@@ -463,23 +467,8 @@ The api will return 4 error types when requests fail:
     "id": 20,
     "question": "What is the heaviest organ in the human body?"
   },
-  "questions": [
-    {
-      "answer": "Alexander Fleming",
-      "category": 1,
-      "difficulty": 3,
-      "id": 21,
-      "question": "Who discovered penicillin?"
-    },
-    {
-      "answer": "Blood",
-      "category": 1,
-      "difficulty": 4,
-      "id": 22,
-      "question": "Hematology is a branch of medicine involving the study of what?"
-    }
-  ],
   "success": true
 }
+
 ```
 
